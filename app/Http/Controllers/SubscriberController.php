@@ -51,10 +51,8 @@ class SubscriberController extends Controller
             'no_flat'=>'required|numeric',
             'no_flour'=>'required|numeric',
             'package_id'=>'required|numeric',
-            'payment_id'=>'required|numeric',
         ]);
-        $start_date=Carbon::now();
-        $end_date = Carbon::parse($start_date)->addDays($request->end_date);
+
 
         Subscriber::create([
             'name'=>$request->name,
@@ -65,7 +63,7 @@ class SubscriberController extends Controller
             'no_flat'=>$request->no_flat,
             'no_flour'=>$request->no_flour,
             'package_id'=>$request->package_id,
-            'end_date'=>$end_date
+//            'end_date'=>$end_date
         ]);
         return response()->json([
             'success'=>"Successfully Subscribe"
@@ -92,31 +90,24 @@ class SubscriberController extends Controller
             'email'=>'required|email|exists:subscribers',
             'password'=>'required|',
         ]);
-       $login= Auth::guard('subscriber')->attempt(['email' => $request->email, 'password' => $request->password]);
-        if($login)
+        $subscribe=Subscriber::where('email','=',$request->email)->first();
+        if($subscribe->status==1)
         {
-            $subscribe=Subscriber::where('email','=',$request->email)->first();
-            session()->put('subscriber',$subscribe);
-            return redirect(route('counter',$subscribe->id));
+            $login= Auth::guard('subscriber')->attempt(['email' => $request->email, 'password' => $request->password]);
+            if($login)
+            {
+                session()->put('subscriber',$subscribe);
+                return redirect(route('counter',$subscribe->id));
+            }
+            else
+            {
+                return redirect(route('login'))->withErrors([
+                    'error_key' => "Password isn't match Email"
+                ]);
+            }
         }
         else
-        {
-            return redirect(route('login'))->withErrors([
-                'error_key' => "Password isn't match Email"
-            ]);
-        }
-
-//        if($subscribe && Hash::check($request->password, $subscribe->password))
-//        {
-//            Auth::login($subscribe);
-//            return redirect(route('counter',$subscribe->id));
-//        }
-//        else
-//        {
-//            return redirect(route('login'))->withErrors([
-//                'error_key' => "Password isn't match Email"]);
-//        }
-
+            return redirect()->route('Append');
     }
     public function Logout()
     {
@@ -126,6 +117,10 @@ class SubscriberController extends Controller
             return redirect(route('login'));
         }
         return redirect(route('Package.show',1));
+    }
+    public function Append()
+    {
+        return view('subscriber.append');
     }
 
     public  function counter($id)
@@ -145,6 +140,7 @@ class SubscriberController extends Controller
         $h=$diff->h;
         if($days <= 0 && $h <=0 && $min <=0 && $sec <=0)
             $subscriber->delete();
+
         return view('subscriber.counter',[
             'end_date'=>$end_date
         ]);

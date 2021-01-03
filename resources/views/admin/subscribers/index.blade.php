@@ -62,8 +62,16 @@
                         <td>{{$subscriber->created_at}}</td>
                         <td>{{$subscriber->end_date}}</td>
                         <td>{{$subscriber->package->name}}</td>
-                        <td ><a  href="#"   class="btn btn-warning ">Active</a></td>
-                        <td  ><a  href="{{route('Subscriber.edit',$subscriber->id)}}" style=" width: 80px" class="btn btn-success">Update</a>
+
+                            <td >
+                                <form action="{{ route('un_active',$subscriber->id) }}" method="post">
+                                    @csrf
+                                    <button  class="btn btn-warning ">
+                                        @if($subscriber->status==0)Active @else UnActive @endif
+                                    </button>
+                                </form>
+                            </td>
+                        <td  ><a  href="{{route('Subscriber.edit',$subscriber->id)}}" style=" width: 80px ; margin-bottom: 3px" class="btn btn-success">Update</a>
                             <a type="submit" onclick="deleteSubscriber(event.target)" data-id="{{ $subscriber->id }}" class="btn btn-danger">Delete</a></td>
                     </tr>
                 @endforeach
@@ -94,7 +102,45 @@
         }
     });
     }
+    $("#editBook").submit(function (e)
+    {
 
+        e.preventDefault()
+        $("#msg_error").hide()
+        $("#msg_error").empty()
+
+        $("#msg_success").hide()
+        $("#msg_success").empty()
+
+        let book_date= new FormData($("#editBook")[0])
+        var id  = $("#editBook").data("id");
+        let _url = `/books/update/${id}`;
+        //  console.log(cate_date.get('name'))
+        $.ajax({
+            type:"POST",
+            url:_url,
+            data:book_date,
+            contentType:false,
+            processData:false,
+            success : function (data)
+            {
+                $("#msg_success").show()
+                $("#msg_success").text(data.success)
+
+            },
+            error : function (xhr,status,error)
+            {
+                $("#msg_error").empty()
+                $("#msg_error").show()
+                $.each(xhr.responseJSON.errors,function (key,item)
+                {
+                    $("#msg_error").append("<p>"+ item +"</p>")
+
+                });
+            }
+        });
+    });
     </script>
+
 
 @endsection

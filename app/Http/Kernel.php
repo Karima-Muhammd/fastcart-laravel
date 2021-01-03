@@ -55,6 +55,7 @@ class Kernel extends HttpKernel
 
         'auth' => \App\Http\Middleware\Authenticate::class,
         'IsAdmin' => \App\Http\Middleware\IsAdmin::class,
+        'ifAdminNotAuth' => \App\Http\Middleware\ifAdminNotAuth::class,
         'userAuth' => \App\Http\Middleware\UserAuth::class,
         'ForNotLogin' => \App\Http\Middleware\ForNotLogin::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

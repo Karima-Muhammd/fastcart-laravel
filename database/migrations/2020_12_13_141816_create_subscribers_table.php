@@ -23,6 +23,7 @@ class CreateSubscribersTable extends Migration
             $table->string('street',100);
             $table->integer('no_flat');
             $table->integer('no_flour');
+            $table->integer('status')->default(0);
             $table->integer('no_build')->nullable();
             $table->foreignId('package_id')->constrained();
             $table->timestamps();

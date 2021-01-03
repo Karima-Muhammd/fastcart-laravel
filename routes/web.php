@@ -66,12 +66,16 @@ Route::middleware('IsAdmin')->prefix('/Admin')->group(function (){
     Route::post('/Subscriber/{id}','SubscriberController@show')->name('Subscriber.show');
 
     Route::get('/do-Logout/','AdminController@logout')->name('Admin.logout');
+    Route::get('/Panel',"AdminController@index")->name('admin_index');
+    Route::post('/un-active/{id}','AdminController@un_active')->name('un_active');
 
 });
-Route::get('/Admin-login/','AdminController@login_admin')->name('Admin.Login');
-Route::post('/Admin-login/','AdminController@do_login')->name('Admin.do.login');
-Route::get('/admin-panel',"AdminController@index")->name('admin_index');
+Route::middleware('ifAdminNotAuth')->group(function (){
+    Route::get('/Admin/login/','AdminController@login_admin')->name('Admin.Login');
+    Route::post('/Admin/login/','AdminController@do_login')->name('Admin.do.login');
 
+});
+Route::get('/Append/','SubscriberController@Append')->name('Append');
 
 
 

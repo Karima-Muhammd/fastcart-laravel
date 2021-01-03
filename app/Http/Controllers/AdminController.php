@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Package;
+use App\Subscriber;
 use App\Ticket;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,5 +49,27 @@ class AdminController extends Controller
     {
         Auth::logout();
         return redirect(route('Admin.Login'));
+    }
+    public function un_active($id)
+    {
+        $subscriber=Subscriber::find($id);
+        $package_id=$subscriber->package_id;
+        $package=Package::find($package_id);
+        $no_orderpermonth=$package->no_orderPerMonth;
+        $start_date=Carbon::now();
+        $end_date = Carbon::parse($start_date)->addDays($no_orderpermonth);
+
+        if($subscriber->status==0)
+        {
+            $subscriber->status=1;
+            $subscriber->end_date=$end_date;
+        }
+        elseif($subscriber->status==1)
+        {
+            $subscriber->status=0;
+            $subscriber->end_date=null;
+        }
+        $subscriber->update();
+        return redirect()->back();
     }
 }
