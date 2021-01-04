@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0374c6e3-c53d-4dd7-b633-8f7ebc048fa6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SubscriberController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SubscriberController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Subscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Subscriber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_13_141816_create_subscribers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_13_141816_create_subscribers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/subscribers/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/subscribers/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/admin_inc/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/admin_inc/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin-app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin-app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="0374c6e3-c53d-4dd7-b633-8f7ebc048fa6" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,9 +10,6 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -137,17 +123,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Middleware" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\fastcart\config" />
       <recent name="C:\wamp64\www\fastcart\app\Http\Middleware" />
       <recent name="C:\wamp64\www\fastcart\database\migrations" />
       <recent name="C:\wamp64\www\fastcart\app" />
       <recent name="C:\wamp64\www\fastcart\resources\views\admin\tickets" />
-      <recent name="C:\wamp64\www\fastcart\resources\views\admin\packages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\fastcart\resources\views\subscriber" />
@@ -169,8 +155,8 @@
       <updated>1609506842275</updated>
       <workItem from="1609506849379" duration="9342000" />
       <workItem from="1609628638004" duration="10436000" />
-      <workItem from="1609682622869" duration="10198000" />
-      <workItem from="1609698578496" duration="142000" />
+      <workItem from="1609682622869" duration="13372000" />
+      <workItem from="1609783656120" duration="1764000" />
     </task>
     <servers />
   </component>

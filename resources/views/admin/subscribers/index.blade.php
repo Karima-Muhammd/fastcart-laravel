@@ -49,32 +49,29 @@
                     </tr>
                     </tfoot>
                     <tbody style="text-align: center">
-                @foreach($subscribers as $subscriber)
-                    <tr id="row_subscriber{{$subscriber->id}}" >
-                        <td>{{$subscriber->id}}</td>
-                        <td>{{$subscriber->name}}</td>
-                        <td>{{$subscriber->email}}</td>
-                        <td>{{$subscriber->phone}}</td>
-                        <td>{{$subscriber->street}}</td>
-                        <td>{{$subscriber->no_flat}}</td>
-                        <td>{{$subscriber->no_flour}}</td>
-                        <td>{{$subscriber->no_build}}</td>
-                        <td>{{$subscriber->created_at}}</td>
-                        <td>{{$subscriber->end_date}}</td>
-                        <td>{{$subscriber->package->name}}</td>
+                    @foreach($subscribers as $subscriber)
+                        <tr id="row_subscriber{{$subscriber->id}}" >
+                            <td>{{$subscriber->id}}</td>
+                            <td>{{$subscriber->name}}</td>
+                            <td>{{$subscriber->email}}</td>
+                            <td>{{$subscriber->phone}}</td>
+                            <td>{{$subscriber->street}}</td>
+                            <td>{{$subscriber->no_flat}}</td>
+                            <td>{{$subscriber->no_flour}}</td>
+                            <td>{{$subscriber->no_build}}</td>
+                            <td>{{$subscriber->created_at}}</td>
+                            <td id="end">{{$subscriber->end_date}}</td>
+                            <td>{{$subscriber->package->name}}</td>
 
                             <td >
-                                <form action="{{ route('un_active',$subscriber->id) }}" method="post">
-                                    @csrf
-                                    <button  class="btn btn-warning ">
-                                        @if($subscriber->status==0)Active @else UnActive @endif
-                                    </button>
-                                </form>
+                                <a type="submit" data-val="{{$subscriber->end_date}}" style="padding: 8px" data-id="{{ $subscriber->id }}" class="badge badge-warning active-btn" onclick="active(event.target)"  >
+                                    @if($subscriber->status==0)Active @else UnActive @endif
+                                </a>
                             </td>
-                        <td  ><a  href="{{route('Subscriber.edit',$subscriber->id)}}" style=" width: 80px ; margin-bottom: 3px" class="btn btn-success">Update</a>
-                            <a type="submit" onclick="deleteSubscriber(event.target)" data-id="{{ $subscriber->id }}" class="btn btn-danger">Delete</a></td>
-                    </tr>
-                @endforeach
+                            <td  ><a  href="{{route('Subscriber.edit',$subscriber->id)}}" style="padding: 8px; margin-bottom: 4px; font-size: 10px" class="badge badge-success">Update</a>
+                                <a type="submit" onclick="deleteSubscriber(event.target)" style="padding: 8px; font-size: 10px" data-id="{{ $subscriber->id }}" class="badge badge-danger">Delete</a></td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -86,60 +83,50 @@
     <script src="{{asset('admin/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('admin/js/demo/datatables-demo.js')}}"></script>
     <script>
-    function deleteSubscriber(event) {
-        var id  = $(event).data("id");
-        let _url = `/Admin/Subscriber/${id}`;
-        let _token   = $('meta[name="csrf-token"]').attr('content');
-        $.ajax({
-        url: _url,
-        type: 'DELETE',
-        data: {
-        _token: _token
-        },
-        success: function(response)
-        {
-            $("#row_subscriber"+id).remove();
-        }
-    });
-    }
-    $("#editBook").submit(function (e)
-    {
-
-        e.preventDefault()
-        $("#msg_error").hide()
-        $("#msg_error").empty()
-
-        $("#msg_success").hide()
-        $("#msg_success").empty()
-
-        let book_date= new FormData($("#editBook")[0])
-        var id  = $("#editBook").data("id");
-        let _url = `/books/update/${id}`;
-        //  console.log(cate_date.get('name'))
-        $.ajax({
-            type:"POST",
-            url:_url,
-            data:book_date,
-            contentType:false,
-            processData:false,
-            success : function (data)
-            {
-                $("#msg_success").show()
-                $("#msg_success").text(data.success)
-
-            },
-            error : function (xhr,status,error)
-            {
-                $("#msg_error").empty()
-                $("#msg_error").show()
-                $.each(xhr.responseJSON.errors,function (key,item)
+        function deleteSubscriber(event) {
+            var id  = $(event).data("id");
+            let _url = `/Admin/Subscriber/${id}`;
+            let _token   = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: _url,
+                type: 'DELETE',
+                data: {
+                    _token: _token
+                },
+                success: function(response)
                 {
-                    $("#msg_error").append("<p>"+ item +"</p>")
+                    $("#row_subscriber"+id).remove();
+                }
+            });
+        }
+        function active(event) {
+            var id  = $(event).data("id");
+            var val  = $(event).data("val");
+            let _url = `/Admin/un-active/${id}`;
+            let _token   = $('meta[name="csrf-token"]').attr('content');
 
-                });
-            }
-        });
-    });
+            $.ajax({
+                url: _url,
+                type: 'post',
+                data: {
+                    _token: _token
+                },
+                success: function(response) {
+
+                    if($('.active-btn').html()=='Active')
+                    {
+                        $('.active-btn').html('UnActive');
+                        $('#end').text(val)
+                    }
+                    else
+                    {
+                        $('.active-btn').html('Active');
+                        $('#end').empty();
+                    }
+
+                }
+            });
+        }
     </script>
 
 

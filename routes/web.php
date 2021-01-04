@@ -36,7 +36,7 @@ Route::get('/', function () {
 })->name('home');
 //Route::resource('Package','PackageController');
 Route::resource('Message','MessageController');
-Route::resource('Ticket','TicketController');
+//Route::resource('Ticket','TicketController');
 //Route::resource('Subscriber','SubscriberController');
 Route::post('/Subscriber/','SubscriberController@store')->name('Subscriber.store');
 

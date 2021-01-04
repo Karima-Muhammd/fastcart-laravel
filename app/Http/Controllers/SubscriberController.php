@@ -116,7 +116,7 @@ class SubscriberController extends Controller
         {
             return redirect(route('login'));
         }
-        return redirect(route('Package.show',1));
+        return redirect(route('home'));
     }
     public function Append()
     {
@@ -138,12 +138,23 @@ class SubscriberController extends Controller
         $min=$diff->i;
         $sec=$diff->s;
         $h=$diff->h;
-        if($days <= 0 && $h <=0 && $min <=0 && $sec <=0)
-            $subscriber->delete();
+        if($days <= 0)
+        {
+            $this->delete_subscriber($subscriber->id);
+            session()->forget('subscriber');
+            return redirect(route('home'));
+        }
+        else{
+            return view('subscriber.counter',[
+                'end_date'=>$end_date
+            ]);
+        }
 
-        return view('subscriber.counter',[
-            'end_date'=>$end_date
-        ]);
+    }
+    public function delete_subscriber($id)
+    {
+        $subscriber=Subscriber::find($id);
+        $subscriber->delete();
     }
 
     /**

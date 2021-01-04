@@ -84,7 +84,7 @@
             $.ajax({
                 type:"POST",
                 url:"{{route('Ticket.store')}}",
-                data:tkt_date_date,
+                data:tkt_date,
                 contentType:false,
                 processData:false,
                 success : function (data)

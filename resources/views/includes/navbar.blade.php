@@ -23,7 +23,12 @@
                     <a class="nav-link"  style="font-weight:bolder; font-size: 25px"href="{{route('Message.index')}}">تواصل معنا</a>
                 </li>
                 <li class="nav-item">
+                    {{session()->forget('subscriber')}}
+                    @if(session()->has('subscriber') && isset(session()->get('subscriber')->id))
+                    <a class="nav-link"  style="font-weight:bolder; font-size: 25px"href="{{route('counter',session()->get('subscriber')->id)}}">دخول</a>
+                    @else
                     <a class="nav-link"  style="font-weight:bolder; font-size: 25px"href="{{route('login')}}">المشتركين</a>
+                    @endif
                 </li>
             </ul>
         </div>
