@@ -7,6 +7,7 @@
 5. can also make order throught tickets 
 6. can also  send issues if there was issue with him 
 7. can make order from live chat supported with tidio
+
 --> admain 
 1. recieve all orders and activate subscription 
 2. update/delete subscribers 
